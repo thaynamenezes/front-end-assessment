@@ -1,0 +1,67 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600|Raleway" rel="stylesheet"/>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.0.0-rc.3/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.0.0-rc.3/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script type="text/babel">
+
+        class Git extends React.Component {
+            state = {projects: []}
+            componentDidMount() {
+                fetch(`https://api.github.com/users/thaynamenezes/repos`)
+                .then(res => res.json())
+                .then(json => this.setState({ projects: json}))
+            }
+            render(){
+                return(
+                    <div>
+                        <h1 className="title">Tha<span className="border">yna Sant</span>ana</h1>
+                        <h2 class="subtitle">Front-End Developer</h2>
+                            <h2>Previous Works</h2>
+                                {this.state.projects.slice(0, 5).map(project => (
+                                    <ul>
+                                        <li>{project.name}</li>
+                                            <a href= {project.html_url}>{project.html_url}</a>
+                                    </ul>
+                                ))}
+                                <div id="skills" className="skills-page-wrap  padding">
+                                    <h2 className="sub-title position-title">Skills</h2>
+                                    <div className="skills-wrap">
+                                    <h3 className="skills-size">HTML</h3>
+                                    <progress value="80" max="100"></progress>
+                                    <h3 className="skills-size">CSS</h3>
+                                    <progress value="75" max="100"></progress>
+                                    <h3 className="skills-size">JavaScript</h3>
+                                    <progress value="65" max="100"></progress>
+                                    <h3 className="skills-size">React.JS</h3>
+                                    <progress value="60" max="100"></progress>
+                                    <h3 className="skills-size">Ruby on Rails</h3>
+                                    <progress value="50" max="100"></progress>
+                                    </div>
+                                </div>
+                            <h2>Education</h2>
+                                <p>2019-01 - 2019-03</p>
+                                    <p>Wyncode Academy, Full Stack Web Development</p>
+                                    <ul>
+                                        <li>Immersed in a 10 week, full-time programming bootcamp, learning and gaining experience with HTML, CSS, JavaScript, ReactJS, and Ruby on Rails.</li>
+                                        <li>Wrote over 5000 lines of code with two production-ready applications hosted live on the web.</li>
+                                        <li>Specialized in front-end development with a focus on user interface and experience.</li>
+                                        <li>Received the Women in Tech scholarship for recognition of work and dedication as a female developer.</li>
+                                    </ul>
+                            <h2 class="center"><a href="./Thayna_Santana_RESUME.pdf" download className="resume">My Resume</a></h2>
+                    </div>
+                )
+            }
+         }
+
+        const rootElement = document.getElementById('root')
+
+        ReactDOM.render(
+            <Git/>,
+            rootElement)
+    </script>
+</body>
